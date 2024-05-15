@@ -70,9 +70,14 @@ php artisan key:generate
 
 **5. Criar o arquivo `database.sqlite` dentro do diretório `database`:**
 
+No Windows:
+```
+type nul > database\database.sqlite 
 ```
 
-echo > database\database.sqlite 
+No Linux:
+```
+touch database\database.sqlite 
 ```
 
 **6. Executar as migrações do banco de dados:**
