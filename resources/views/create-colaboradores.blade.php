@@ -23,8 +23,16 @@
 @endsection
 
 @section('content')
-    <form action="" method="post">
+    <form action="{{ route('colaborador.store') }}" method="post">
+        @csrf
         <div class="conteudo-form">
+            <p>
+                @if (session('msg'))
+                    <div class="alert alert-success">
+                        {{ session('msg') }}
+                    </div>
+                @endif
+            </p>
             <h1>Formulário de Cadastro de Colaboradores</h1>
             <label for="nome">Nome:</label>
             <br>

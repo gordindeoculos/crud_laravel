@@ -19,3 +19,4 @@ Route::get('/edit-colaboradores', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/colaboradores-store', [App\Http\Controllers\ColaboradorController::class, 'store'])->name('colaborador.store');
