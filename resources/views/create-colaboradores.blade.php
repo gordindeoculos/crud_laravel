@@ -1,72 +1,86 @@
 @extends('layouts.app')
 
 @section('styles')
-    <style>
-        .conteudo-form {
-            margin: 10px;
-            padding: 10px;
-        }
-
-        .conteudo-form input {
-            margin-bottom: 10px;
-            width: 50%;
-        }
-
-        .conteudo-form input[type="submit"] {
-            margin-top: 10px;
-            width: 100px;
-        }
-    </style>
 @endsection
 
 @section('scripts')
 @endsection
 
 @section('content')
-    <form action="{{ route('colaborador.store') }}" method="post">
-        @csrf
-        <div class="conteudo-form">
-            <p>
-                @if (session('msg'))
-                    <div class="alert alert-success">
-                        {{ session('msg') }}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="{{ route('colaborador.store') }}" method="post">
+                    @csrf
+                    <div class="conteudo-form">
+                        <p>
+                            @if (session('msg'))
+                                <div class="alert alert-success">
+                                    {{ session('msg') }}
+                                </div>
+                            @endif
+                        </p>
+
+                        <div class="card">
+                            <div class="card-header">
+                                Formulário de Cadastro de Colaboradores
+                            </div>
+                            <div class="card-body bg-white">
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-12 col-sm-6 col-md-6">
+                                        <label for="nome" class="form-label">Nome</label>
+                                        <input type="text" class="form-control" name="nome" id="nome"
+                                            placeholder="Nome">
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-3">
+                                        <label for="cargo" class="form-label">Cargo</label>
+                                        <input type="text" class="form-control" name="cargo" id="cargo"
+                                            placeholder="Cargo">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3">
+                                        <label for="telefone" class="form-label">Telefone</label>
+                                        <input type="text" class="form-control" name="telefone" id="telefone"
+                                            placeholder="Telefone">
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="E-mail">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="logradouro" class="form-label">Logradouro</label>
+                                    <input type="text" class="form-control" name="logradouro" id="logradouro"
+                                        placeholder="Logradouro">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numero" class="form-label">Número</label>
+                                    <input type="text" class="form-control" name="numero" id="numero"
+                                        placeholder="Número">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="municipio" class="form-label">Município</label>
+                                    <input type="text" class="form-control" name="municipio" id="municipio"
+                                        placeholder="Município">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <input type="text" class="form-control" name="estado" id="estado"
+                                        placeholder="Estado">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                @endif
-            </p>
-            <h1>Formulário de Cadastro de Colaboradores</h1>
-            <label for="nome">Nome:</label>
-            <br>
-            <input type="text" name="nome" id="nome">
-            <br>
-            <label for="cargo">Cargo:</label>
-            <br>
-            <input type="text" name="cargo" id="cargo">
-            <br>
-            <label for="telefone">Telefone:</label>
-            <br>
-            <input type="text" name="telefone" id="telefone">
-            <br>
-            <label for="email">E-mail:</label>
-            <br>
-            <input type="email" name="email" id="email">
-            <br>
-            <label for="logradouro">Logradouro:</label>
-            <br>
-            <input type="text" name="logradouro" id="logradouro">
-            <br>
-            <label for="numero">Número:</label>
-            <br>
-            <input type="text" name="numero" id="numero">
-            <br>
-            <label for="municipio">Município:</label>
-            <br>
-            <input type="text" name="municipio" id="municipio">
-            <br>
-            <label for="estado">Estado:</label>
-            <br>
-            <input type="text" name="estado" id="estado">
-            <br>
-            <input type="submit" value="Enviar">
+                </form>
+            </div>
         </div>
-    </form>
+    </div>
 @endsection
