@@ -15,7 +15,7 @@
                     <div class="conteudo-form">
                         <p>
                             @if (session('msg'))
-                                <div class="alert alert-success">
+                                <div class="alert {{ session('msg_type') == 'error' ? 'alert-danger' : 'alert-success' }}">
                                     {{ session('msg') }}
                                 </div>
                             @endif
