@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Colaborador;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 
 class ColaboradorController extends Controller
 {
@@ -31,8 +32,40 @@ class ColaboradorController extends Controller
     {
         $data = $request->all();
 
-        // Colaborador::create($data);
-        // return redirect()->back()->with('msg', 'Registro incluído com sucesso!');
+        // Defina as regras de validação
+        $rules = [
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|unique:colaboradores,email',
+            'telefone' => 'required|string|max:20',
+            'logradouro' => 'required|string|max:255',
+            'numero' => 'required|integer',
+            'municipio' => 'required|string|max:255',
+            'estado' => 'required|string|size:2',
+            'cargo' => 'required|string|max:255',
+        ];
+
+        $messages = [
+            'nome.required' => 'O campo Nome é obrigatório.',            
+            'email.required' => 'O campo E-mail é obrigatório.',
+            'email.email' => 'O E-mail informado não é válido.',
+            'email.unique' => 'O E-mail informado já está cadastrado.',
+            'telefone.required' => 'O campo Telefone é obrigatório.',
+            'logradouro.required' => 'O campo Logradouro é obrigatório.',
+            'numero.required' => 'O campo Número é obrigatório.',
+            'numero.integer' => 'O campo Número deve ser um número inteiro.',
+            'municipio.required' => 'O campo Município é obrigatório.',
+            'estado.required' => 'O campo Estado é obrigatório.',
+            'estado.size' => 'O campo Estado deve ter exatamente 2 caracteres.',
+            'cargo.required' => 'O campo Cargo é obrigatório.',
+        ];
+
+        // Crie o validador
+        $validator = Validator::make($data, $rules, $messages);
+
+        // Verifique se a validação falhou
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         try {
             Colaborador::create($data);
