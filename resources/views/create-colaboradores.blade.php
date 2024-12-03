@@ -24,12 +24,13 @@
                                 Formulário de Cadastro de Colaboradores
                             </div>
                             <div class="card-body bg-white">
+                                <p>Os campos com * são de preenchimento obrigatório.</p>
                                 <div class="row g-3 mb-3">
                                     <!-- Nome -->
                                     <div class="col-12 col-sm-6 col-md-8">
-                                        <label for="nome" class="form-label">Nome</label>
+                                        <label for="nome" class="form-label">Nome*</label>
                                         <input type="text" class="form-control @error('nome') is-invalid @enderror"
-                                            name="nome" id="nome" placeholder="Nome" value="{{ old('nome') }}">
+                                            name="nome" id="nome" placeholder="Nome" value="{{ old('nome') }}" required>
                                         @error('nome')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -37,9 +38,9 @@
 
                                     <!-- Cargo -->
                                     <div class="col-12 col-sm-6 col-md-4">
-                                        <label for="cargo" class="form-label">Cargo</label>
+                                        <label for="cargo" class="form-label">Cargo*</label>
                                         <input type="text" class="form-control @error('cargo') is-invalid @enderror"
-                                            name="cargo" id="cargo" placeholder="Cargo" value="{{ old('cargo') }}">
+                                            name="cargo" id="cargo" placeholder="Cargo" value="{{ old('cargo') }}" required>
                                         @error('cargo')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -49,10 +50,10 @@
                                 <div class="row g-3 mb-3">
                                     <!-- Telefone -->
                                     <div class="col-12 col-sm-6 col-md-4">
-                                        <label for="telefone" class="form-label">Telefone</label>
+                                        <label for="telefone" class="form-label">Telefone*</label>
                                         <input type="text" class="form-control @error('telefone') is-invalid @enderror"
                                             name="telefone" id="telefone" placeholder="Telefone"
-                                            value="{{ old('telefone') }}">
+                                            value="{{ old('telefone') }}" required>
                                         @error('telefone')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -60,9 +61,9 @@
 
                                     <!-- E-mail -->
                                     <div class="col-12 col-sm-6 col-md-8">
-                                        <label for="email" class="form-label">E-mail</label>
-                                        <input type="text" class="form-control @error('email') is-invalid @enderror"
-                                            name="email" id="email" placeholder="E-mail" value="{{ old('email') }}">
+                                        <label for="email" class="form-label">E-mail*</label>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            name="email" id="email" placeholder="E-mail" value="{{ old('email') }}" required>
                                         @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -72,10 +73,10 @@
                                 <div class="row g-3 mb-3">
                                     <!-- Logradouro -->
                                     <div class="col-12 col-sm-8 col-md-9">
-                                        <label for="logradouro" class="form-label">Logradouro</label>
+                                        <label for="logradouro" class="form-label">Logradouro*</label>
                                         <input type="text" class="form-control @error('logradouro') is-invalid @enderror"
                                             name="logradouro" id="logradouro" placeholder="Logradouro"
-                                            value="{{ old('logradouro') }}">
+                                            value="{{ old('logradouro') }}" required>
                                         @error('logradouro')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -83,9 +84,9 @@
 
                                     <!-- Número -->
                                     <div class="col-12 col-sm-4 col-md-3">
-                                        <label for="numero" class="form-label">Número</label>
-                                        <input type="text" class="form-control @error('numero') is-invalid @enderror"
-                                            name="numero" id="numero" placeholder="Número" value="{{ old('numero') }}">
+                                        <label for="numero" class="form-label">Número*</label>
+                                        <input type="number" class="form-control @error('numero') is-invalid @enderror"
+                                            name="numero" id="numero" placeholder="Número" value="{{ old('numero') }}" required>
                                         @error('numero')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -95,10 +96,10 @@
                                 <div class="row g-3 mb-3">
                                     <!-- Município -->
                                     <div class="col-12 col-sm-8 col-md-9">
-                                        <label for="municipio" class="form-label">Município</label>
+                                        <label for="municipio" class="form-label">Município*</label>
                                         <input type="text" class="form-control @error('municipio') is-invalid @enderror"
                                             name="municipio" id="municipio" placeholder="Município"
-                                            value="{{ old('municipio') }}">
+                                            value="{{ old('municipio') }}" required>
                                         @error('municipio')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -106,9 +107,9 @@
 
                                     <!-- Estado -->
                                     <div class="col-12 col-sm-4 col-md-3">
-                                        <label for="estado" class="form-label">Estado</label>
+                                        <label for="estado" class="form-label">Estado*</label>
                                         <input type="text" class="form-control @error('estado') is-invalid @enderror"
-                                            name="estado" id="estado" placeholder="Estado" value="{{ old('estado') }}">
+                                            name="estado" id="estado" placeholder="Estado" value="{{ old('estado') }}" minlength="2" maxlength="2" required>
                                         @error('estado')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
