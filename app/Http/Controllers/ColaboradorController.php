@@ -36,7 +36,7 @@ class ColaboradorController extends Controller
         $rules = [
             'nome' => 'required|string|max:255',
             'email' => 'required|email|unique:colaboradores,email',
-            'telefone' => 'required|string|max:20',
+            'telefone' => ['required', 'regex:/^\(\d{2}\) \d{4,5}-\d{4}$/'],
             'logradouro' => 'required|string|max:255',
             'numero' => 'required|integer',
             'municipio' => 'required|string|max:255',
@@ -50,6 +50,7 @@ class ColaboradorController extends Controller
             'email.email' => 'O E-mail informado não é válido.',
             'email.unique' => 'O E-mail informado já está cadastrado.',
             'telefone.required' => 'O campo Telefone é obrigatório.',
+            'telefone.regex' => 'O telefone deve estar no formato (99) 9999-9999 ou (99) 99999-9999.',
             'logradouro.required' => 'O campo Logradouro é obrigatório.',
             'numero.required' => 'O campo Número é obrigatório.',
             'numero.integer' => 'O campo Número deve ser um número inteiro.',
