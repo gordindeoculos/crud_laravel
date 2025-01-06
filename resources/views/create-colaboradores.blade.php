@@ -4,6 +4,85 @@
 @endsection
 
 @section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ### Faz a validação dos campos de preenchimento obrigatório ###
+            const requiredInputs = document.querySelectorAll('input[required]');
+
+            // Aplica o evento 'blur' a cada input
+            requiredInputs.forEach(input => {
+                input.addEventListener('blur', () => {
+                    // Verifica se o campo está vazio
+                    if (input.value.trim() === '') {
+                        if (!input.nextElementSibling || !input.nextElementSibling.classList
+                            .contains('invalid-feedback')) {
+                            input.insertAdjacentHTML(
+                                'afterend',
+                                `<div class="invalid-feedback">O campo ${input.previousElementSibling.textContent.replace('*', '').trim()} é obrigatório</div>`
+                            );
+                        }
+                        input.classList.add('is-invalid');
+                    } else {
+                        // Remove a mensagem de erro, se existir
+                        if (input.nextElementSibling && input.nextElementSibling.classList.contains(
+                                'invalid-feedback')) {
+                            input.nextElementSibling.remove();
+                        }
+                        input.classList.remove('is-invalid');
+                    }
+                });
+            });
+
+            // ### Faz a validação do E-mail ###
+            const emailInput = document.getElementById('email');
+
+            emailInput.addEventListener('blur', () => {
+                const emailValue = emailInput.value.trim();
+
+                // Regex para validar o formato do e-mail
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Verifica se o campo está vazio
+                if (emailValue === '') {
+                    // Remove mensagem de erro duplicada, se houver
+                    removeErrorMessage(emailInput);
+
+                    // Adiciona mensagem de erro
+                    addErrorMessage(emailInput, 'O campo E-mail é obrigatório.');
+                }
+                // Verifica se o e-mail é inválido
+                else if (!emailRegex.test(emailValue)) {
+                    // Remove mensagem de erro duplicada, se houver
+                    removeErrorMessage(emailInput);
+
+                    // Adiciona mensagem de erro
+                    addErrorMessage(emailInput, 'Insira um e-mail válido.');
+                } else {
+                    // Remove mensagem de erro e a classe inválida
+                    removeErrorMessage(emailInput);
+                }
+            });
+
+            // Função para adicionar uma mensagem de erro
+            function addErrorMessage(input, message) {
+                if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('invalid-feedback')) {
+                    input.insertAdjacentHTML(
+                        'afterend',
+                        `<div class="invalid-feedback">${message}</div>`
+                    );
+                }
+                input.classList.add('is-invalid');
+            }
+
+            // Função para remover a mensagem de erro
+            function removeErrorMessage(input) {
+                if (input.nextElementSibling && input.nextElementSibling.classList.contains('invalid-feedback')) {
+                    input.nextElementSibling.remove();
+                }
+                input.classList.remove('is-invalid');
+            }
+        });
+    </script>
 @endsection
 
 @section('content')
