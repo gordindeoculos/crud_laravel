@@ -14,20 +14,15 @@
                 input.addEventListener('blur', () => {
                     // Verifica se o campo está vazio
                     if (input.value.trim() === '') {
-                        if (!input.nextElementSibling || !input.nextElementSibling.classList
-                            .contains('invalid-feedback')) {
-                            input.insertAdjacentHTML(
-                                'afterend',
-                                `<div class="invalid-feedback">O campo ${input.previousElementSibling.textContent.replace('*', '').trim()} é obrigatório</div>`
-                            );
-                        }
+                        // Remove mensagem de erro duplicada, se houver
+                        removeErrorMessage(input);
+
+                        // Adiciona mensagem de erro
+                        addErrorMessage(input, `O campo ${input.previousElementSibling.textContent.replace('*', '').trim()} é obrigatório`);
                         input.classList.add('is-invalid');
                     } else {
                         // Remove a mensagem de erro, se existir
-                        if (input.nextElementSibling && input.nextElementSibling.classList.contains(
-                                'invalid-feedback')) {
-                            input.nextElementSibling.remove();
-                        }
+                        removeErrorMessage(input);
                         input.classList.remove('is-invalid');
                     }
                 });
@@ -60,6 +55,27 @@
                 } else {
                     // Remove mensagem de erro e a classe inválida
                     removeErrorMessage(emailInput);
+                }
+            });
+
+            // ### Faz a validação da sigla do estado exigindo 2 caracateres ###
+            const estadoInput = document.getElementById('estado');
+
+            estadoInput.addEventListener('blur', () => {
+                const estadoValue = estadoInput.value.trim();
+
+                // Verifica se o campo está vazio
+                if (estadoValue === '') {
+                    removeErrorMessage(estadoInput);
+                    addErrorMessage(estadoInput, 'O campo Estado é obrigatório.');
+                } 
+                // Verifica se o campo possui exatamente 2 caracteres
+                else if (estadoValue.length !== 2) {
+                    removeErrorMessage(estadoInput);
+                    addErrorMessage(estadoInput, 'O campo deve conter exatamente 2 caracteres.');
+                } else {
+                    // Remove a mensagem de erro, se existir
+                    removeErrorMessage(estadoInput);
                 }
             });
 
