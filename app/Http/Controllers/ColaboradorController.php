@@ -14,7 +14,8 @@ class ColaboradorController extends Controller
      */
     public function index()
     {
-        //
+        $colaboradores = Colaborador::all();
+        return view('list-colaboradores', compact('colaboradores'));
     }
 
     /**
@@ -22,7 +23,7 @@ class ColaboradorController extends Controller
      */
     public function create()
     {
-        //
+        return view('create-colaboradores');
     }
 
     /**
@@ -107,7 +108,8 @@ class ColaboradorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $colaborador = Colaborador::find($id);
+        return view('info-colaborador', compact('colaborador'));
     }
 
     /**
@@ -115,7 +117,7 @@ class ColaboradorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('edit-colaboradores');
     }
 
     /**
@@ -131,6 +133,9 @@ class ColaboradorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $colaborador = Colaborador::find($id);
+        $colaborador->delete();
+
+        return redirect()->back()->with('msg', "O colaborador $colaborador->nome foi excluído com sucesso!");
     }
 }
