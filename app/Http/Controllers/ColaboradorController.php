@@ -71,8 +71,8 @@ class ColaboradorController extends Controller
         }
 
         try {
-            Colaborador::create($data);
-            return redirect()->back()->with('msg', 'Registro incluído com sucesso!');
+            $colaborador = Colaborador::create($data);
+            return redirect()->route('coloborador.list')->with('msg', "Colaborador $colaborador->nome foi incluído com sucesso!");
         } catch (QueryException $e) {
             // Verifique se o erro é de chave única
             if ($e->errorInfo[1] == 1062) {
@@ -118,7 +118,7 @@ class ColaboradorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('edit-colaborador');
     }
 
     /**
@@ -134,6 +134,9 @@ class ColaboradorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $colaborador = Colaborador::find($id);
+        $colaborador->delete();
+
+        return redirect()->back()->with('msg', "O colaborador $colaborador->nome foi excluído com sucesso!");
     }
 }

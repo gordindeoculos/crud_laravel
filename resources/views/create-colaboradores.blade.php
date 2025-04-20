@@ -108,12 +108,6 @@
                 <form action="{{ route('colaborador.store') }}" method="post">
                     @csrf
                     <div class="conteudo-form">
-                        @if (session('msg'))
-                            <div class="alert {{ session('msg_type') == 'error' ? 'alert-danger' : 'alert-success' }}">
-                                {{ session('msg') }}
-                            </div>
-                        @endif
-
                         <div class="card">
                             <div class="card-header">
                                 Formulário de Cadastro de Colaboradores
@@ -222,6 +216,7 @@
 
                             <div class="card-footer">
                                 <div class="col-auto">
+                                    <a href="{{ route('coloborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </div>
                             </div>

@@ -8,15 +8,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/edit-colaboradores', function () {
-    return view('edit-colaboradores');
-});
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/create-colaboradores', [ColaboradorController::class, 'create'])->name('colaborador.create');
+Route::get('/edit-colaborador/{id}', [ColaboradorController::class, 'edit'])->name('colaborador.edit');
 Route::get('/detalhes-colaborador/{id}', [ColaboradorController::class, 'show'])->name('colaborador.detalhes');
+Route::delete('/excluir-colaborador/{id}', [ColaboradorController::class, 'destroy'])->name('colaborador.excluir');
 Route::get('/list-colaboradores', [ColaboradorController::class, 'index'])->name('coloborador.list');
 Route::post('/colaboradores-store', [ColaboradorController::class, 'store'])->name('colaborador.store');
