@@ -14,7 +14,9 @@ class ColaboradorController extends Controller
      */
     public function index()
     {
-        //
+        $colaboradores = Colaborador::all();
+        
+        return view('list-colaboradores', compact('colaboradores'));
     }
 
     /**
@@ -22,7 +24,7 @@ class ColaboradorController extends Controller
      */
     public function create()
     {
-        //
+        return view('create-colaboradores');
     }
 
     /**
@@ -107,7 +109,8 @@ class ColaboradorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $colaborador = Colaborador::find($id);
+        return view('detalhes-colaborador', compact('colaborador'));
     }
 
     /**
