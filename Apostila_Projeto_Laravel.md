@@ -223,9 +223,11 @@ Através deste teste é possível verificar que a **Redefinição de Senha** est
 
 Neste tópico iremos verificar como personalizar a mensagem (notificação) enviada por e-mail ao usuário quando solicitado a redefinição de senha.
 
-#### Opção 1: Alterar diretamente no modelo padrão de notificação para redefinição de senha do Laravel
+#### Opção 1: Alterar diretamente no modelo padrão de notificação para redefinição de senha do Laravel (não recomendado)
 
-Aqui, iremos fazer a alteração diretamente no modelo padrão de notificação de redefinição de senha por e-mail do Laravel.
+Aqui, iremos fazer a alteração diretamente no modelo padrão de notificação de redefinição de senha por e-mail do Laravel, o que
+não é recomendado, pois quando atualizar o diretório `vendor` ou quando for feito o clone do projeto onde não existe o diretório `vendor` que
+será criado pelo comando `composer install`, toda essa configuração se perderá.
 
 Abra o arquivo `vendor/laravel/framework/src/Illuminate/Auth/Notifications/ResetPassword.php` e altere o método (função) `buildMailMessage($url)` conforme abaixo:
 
@@ -276,9 +278,9 @@ Abra o arquivo `vendor/laravel/framework/src/Illuminate/Notifications/resources/
 </x-slot:subcopy>
 ```
 
-#### Opção 2: Criar um modelo personalizado de notificação para redefinição de senha
+#### Opção 2: Criar um modelo personalizado de notificação para redefinição de senha (recomendado)
 
-Aqui iremos criar uma notificação de redefinição de senha por e-mail e personalizá-la, sem a necessidade de alterar o modelo padrão do Laravel.
+Aqui iremos criar uma notificação de redefinição de senha por e-mail e personalizá-la, sem a necessidade de alterar o modelo padrão do Laravel, o que é recomendado e o correto a se fazer.
 
 **Passo 1:** Crie uma nova classe Notification
 
@@ -422,6 +424,49 @@ Para retornar uma mensagem personalizada quando o usuário fizer várias tentati
 ```php
 'throttled' => 'Muitas tentativas de login. Tente novamente em alguns segundos.',
 ```
+
+**Passo 9:** Personalizar o Template do E-mail de Redefinição de Senha
+
+Execute o comando:
+
+```bash
+php artisan vendor:publish --tag=laravel-mail
+```
+
+Esse comando vai copiar os arquivos de template de e-mail para:
+
+```
+resources/views/vendor/mail/
+```
+
+Agora edite os arquivos:
+
+* `resources/views/vendor/mail/html/layout.blade.php`
+  👉 Esse é o layout geral (tem o logo do Laravel no topo).
+
+* `resources/views/vendor/mail/html/header.blade.php`
+  👉 É onde está o logo. Você pode remover ou trocar a imagem por outra.
+
+Exemplo para trocar o logo:
+
+```blade
+{{-- resources/views/vendor/mail/html/header.blade.php --}}
+<tr>
+    <td class="header">
+        <a href="{{ config('app.url') }}" style="display: inline-block;">
+            <img src="{{ asset('images/seu-logo.png') }}" class="logo" alt="Nome da sua aplicação">
+        </a>
+    </td>
+</tr>
+```
+
+> 📁 Garanta que sua imagem `seu-logo.png` esteja dentro de `public/images/`.
+
+---
+
+✅ Resultado
+
+Depois disso, todos os e-mails enviados usarão seu layout personalizado, sem o logo do Laravel, e você poderá ajustar tudo como quiser — cores, espaçamentos, fontes, etc.
 
 Após seguir esses passos, você terá personalizado com sucesso a mensagem de redefinição de senha do Laravel. Certifique-se de testar o processo de redefinição de senha para garantir que tudo funcione conforme o esperado.
 
