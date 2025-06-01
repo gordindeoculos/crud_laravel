@@ -17,7 +17,9 @@ import { createApp } from 'vue';
 const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
+import InputField from './components/InputField.vue';
 app.component('example-component', ExampleComponent);
+app.component('input-field', InputField);
 
 /**
  * The following block of code may be used to automatically register your
