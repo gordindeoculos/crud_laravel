@@ -5,7 +5,7 @@
  */
 
 import './bootstrap';
-import './validacao-formulario'
+// import './validacao-formulario'
 import { createApp } from 'vue';
 
 /**

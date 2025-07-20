@@ -4,7 +4,7 @@
 @endsection
 
 @section('scripts')
-    
+    <script src="{{ asset('js/validacao-formulario.js') }}"></script>
 @endsection
 
 @section('content')

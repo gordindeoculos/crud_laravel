@@ -18,11 +18,14 @@
                                 Formulário de Cadastro de Colaboradores
                             </div>
                             <div class="card-body bg-white">
-                                <input-field id="nome" label="Nome Completo" placeholder="Digite seu nome"
-                                    tipo="text" :requerido="true" mensagem-erro="Nome é obrigatório"></input-field>
+                                <input-field id="nome" label="Nome" tipo="text" placeholder="Nome"
+                                    :requerido="true" :valor-inicial="'{{ old('nome') }}'"
+                                    mensagem-erro="Preencimento obrigatório."></input-field>
 
-                                <input-field id="email" label="E-mail" placeholder="Digite seu e-mail" tipo="email"
-                                    :requerido="true" mensagem-erro="E-mail inválido"></input-field>
+                                <input-field id="email" label="E-mail" tipo="email" placeholder="Digite seu e-mail"
+                                    :requerido="true" :valor-inicial="'{{ old('email') }}'"
+                                    mensagem-erro="E-mail inválido"></input-field>
+
                             </div>
 
                             <div class="card-footer">

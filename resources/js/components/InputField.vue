@@ -1,16 +1,17 @@
 <template>
   <div class="mb-3">
-    <label :for="id" class="form-label">{{ label }}</label>
+    <label :for="id" class="form-label">{{ label }}<span v-if="requerido">*</span></label>
     <input
       :id="id"
       :type="tipo"
       :name="id"
       class="form-control"
+      :class="{ 'is-invalid': erro }"
       :placeholder="placeholder"
       v-model="valor"
       @blur="validarCampo"
     />
-    <div v-if="erro" class="text-danger mt-1">
+    <div v-if="erro" class="invalid-feedback">
       {{ mensagemErro }}
     </div>
   </div>
@@ -30,11 +31,15 @@ export default {
       default: false
     },
     placeholder: String,
-    mensagemErro: String
+    mensagemErro: String,
+    valorInicial: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
-      valor: '',
+      valor: this.valorInicial,
       erro: false
     };
   },
