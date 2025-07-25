@@ -3,10 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">Compomente de Exemplo</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        Este é um exemplo de um componten Vue.JS
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('O componente foi montado com sucesso!')
         }
     }
 </script>
