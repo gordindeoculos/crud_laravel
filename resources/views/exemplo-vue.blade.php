@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         <div class="justify-content-center">
-            <example-component></example-component>
+            <hello-world></hello-world>
         </div>
     </div>
 @endsection
