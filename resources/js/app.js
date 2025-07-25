@@ -18,9 +18,11 @@ const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import HelloWorld from './components/HelloWorld.vue';
+import InputEmail from './components/InputEmail.vue';
 
-app.component('hello-world', HelloWorld);
 app.component('example-component', ExampleComponent);
+app.component('hello-world', HelloWorld);
+app.component('input-email', InputEmail);
 
 /**
  * The following block of code may be used to automatically register your
