@@ -24,7 +24,12 @@ class ColaboradorController extends Controller
      */
     public function create()
     {
-        return view('create-colaboradores');
+        return view('create-colaborador');
+    }
+
+    public function createvue()
+    {
+        return view('create-colaborador-vue');
     }
 
     /**
@@ -120,6 +125,12 @@ class ColaboradorController extends Controller
     {
         $colaborador = Colaborador::findOrFail($id);
         return view('edit-colaborador', compact('colaborador'));
+    }
+
+    public function editvue(string $id)
+    {
+        $colaborador = Colaborador::findOrFail($id);
+        return view('edit-colaborador-vue', compact('colaborador'));
     }
 
     /**

@@ -27,7 +27,7 @@
                                         <input-field id="nome" label="Nome" tipo="text" placeholder="Nome"
                                             :requerido="true" :valor-inicial="'{{ old('nome') }}'"
                                             mensagem-erro="{{ $errors->first('nome') ? e($errors->first('nome')) : '' }}"
-                                            mensagem-erro-padrao="Preenchimento obrigatório." />
+                                            mensagem-erro-padrao="Preenchimento obrigatório."></input-field>
                                     </div>
 
                                     <!-- Cargo -->
@@ -35,7 +35,7 @@
                                         <input-field id="cargo" label="Cargo" tipo="text" placeholder="Cargo"
                                             :requerido="true" :valor-inicial="'{{ old('cargo') }}'"
                                             mensagem-erro="{{ $errors->first('cargo') ? e($errors->first('cargo')) : '' }}"
-                                            mensagem-erro-padrao="Preenchimento obrigatório." />
+                                            mensagem-erro-padrao="Preenchimento obrigatório."></input-field>
                                     </div>
                                 </div>
 
@@ -46,7 +46,7 @@
                                             placeholder="(99) 99999-9999" :requerido="true"
                                             :valor-inicial="'{{ old('telefone') }}'"
                                             mensagem-erro="{{ $errors->first('telefone') ? e($errors->first('telefone')) : '' }}"
-                                            mensagem-erro-padrao="Digite um telefone válido no formato (99) 99999-9999." />
+                                            mensagem-erro-padrao="Digite um telefone válido no formato (99) 99999-9999."></input-field>
                                     </div>
 
                                     <!-- E-mail -->
@@ -55,7 +55,7 @@
                                             placeholder="Digite seu e-mail" :requerido="true"
                                             :valor-inicial="'{{ old('email') }}'"
                                             mensagem-erro="{{ $errors->first('email') ? e($errors->first('email')) : '' }}"
-                                            mensagem-erro-padrao="E-mail inválido." />
+                                            mensagem-erro-padrao="E-mail inválido."></input-field>
                                     </div>
                                 </div>
 
@@ -66,7 +66,7 @@
                                             placeholder="Logradouro" :requerido="true"
                                             :valor-inicial="'{{ old('logradouro') }}'"
                                             mensagem-erro="{{ $errors->first('logradouro') ? e($errors->first('logradouro')) : '' }}"
-                                            mensagem-erro-padrao="Preenchimento obrigatório." />
+                                            mensagem-erro-padrao="Preenchimento obrigatório."></input-field>
                                     </div>
 
                                     <!-- Número -->
@@ -74,7 +74,7 @@
                                         <input-field id="numero" label="Número" tipo="text" placeholder="Número"
                                             :requerido="true" :valor-inicial="'{{ old('numero') }}'"
                                             mensagem-erro="{{ $errors->first('numero') ? e($errors->first('numero')) : '' }}"
-                                            mensagem-erro-padrao="Preenchimento obrigatório." />
+                                            mensagem-erro-padrao="Preenchimento obrigatório."></input-field>
                                     </div>
                                 </div>
 
@@ -84,7 +84,7 @@
                                         <input-field id="municipio" label="Município" tipo="text" placeholder="Município"
                                             :requerido="true" :valor-inicial="'{{ old('municipio') }}'"
                                             mensagem-erro="{{ $errors->first('municipio') ? e($errors->first('municipio')) : '' }}"
-                                            mensagem-erro-padrao="Preenchimento obrigatório." />
+                                            mensagem-erro-padrao="Preenchimento obrigatório."></input-field>
                                     </div>
 
                                     <!-- Estado -->
@@ -92,7 +92,7 @@
                                         <input-field id="estado" label="Estado" tipo="text" placeholder="UF"
                                             :requerido="true" :valor-inicial="'{{ old('estado') }}'"
                                             mensagem-erro="{{ $errors->first('estado') ? e($errors->first('estado')) : '' }}"
-                                            mensagem-erro-padrao="Deve conter exatamente 2 letras." />
+                                            mensagem-erro-padrao="Deve conter exatamente 2 letras."></input-field>
                                     </div>
                                 </div>
                             </div>

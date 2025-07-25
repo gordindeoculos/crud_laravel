@@ -8,14 +8,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/form-vue', function () {
-    return view('form-component-vue');
-});
+Route::get('/create-colaborador-vue', [ColaboradorController::class, 'createvue'])->name('colaborador.createvue');
+Route::get('/edit-colaborador-vue/{id}', [ColaboradorController::class, 'editvue'])->name('colaborador.editvue');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/create-colaboradores', [ColaboradorController::class, 'create'])->name('colaborador.create');
+Route::get('/create-colaborador', [ColaboradorController::class, 'create'])->name('colaborador.create');
 Route::get('/edit-colaborador/{id}', [ColaboradorController::class, 'edit'])->name('colaborador.edit');
 Route::put('/update-colaborador/{id}', [ColaboradorController::class, 'update'])->name('colaborador.update');
 Route::get('/detalhes-colaborador/{id}', [ColaboradorController::class, 'show'])->name('colaborador.detalhes');
