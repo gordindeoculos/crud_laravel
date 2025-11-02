@@ -23,16 +23,13 @@
                         </div>
 
                         <div class="row g-3 mb-3">
-                            <form-input label="Telefone" name="telefone" id="telefone" type="tel"
-                                placeholder="(99) 99999-9999" required value="{{ old('telefone') }}"
-                                :server-error="'{{ $errors->first('telefone') }}'"
-                                wrapper-class="col-12 col-sm-6 col-md-6"></form-input>
+                            <form-input label="Telefone" name="telefone" id="telefone" placeholder="Telefone" required
+                                value="{{ old('telefone') }}" :server-error="'{{ $errors->first('telefone') }}'"
+                                wrapper-class="col-12 col-sm-6 col-md-4"></form-input>
 
-                            <form-input label="E-mail" name="email" id="email" type="email"
-                                placeholder="Digite seu e-mail" required value="{{ old('email') }}"
-                                :server-error="'{{ $errors->first('email') }}'"
-                                wrapper-class="col-12 col-sm-6 col-md-6"></form-input>
-
+                            <form-input label="E-mail" name="email" id="email" type="email" placeholder="E-mail"
+                                required value="{{ old('email') }}" :server-error="'{{ $errors->first('email') }}'"
+                                wrapper-class="col-12 col-sm-6 col-md-8"></form-input>
                         </div>
 
                         <div class="row g-3 mb-3">
@@ -41,7 +38,7 @@
                                 :server-error="'{{ $errors->first('logradouro') }}'"
                                 wrapper-class="col-12 col-sm-8 col-md-9"></form-input>
 
-                            <form-input label="Número" name="numero" id="numero" placeholder="Número" type="number"
+                            <form-input label="Número" name="numero" id="numero" placeholder="Número" type="text"
                                 required value="{{ old('numero') }}" :server-error="'{{ $errors->first('numero') }}'"
                                 wrapper-class="col-12 col-sm-4 col-md-3"></form-input>
                         </div>
@@ -51,9 +48,8 @@
                                 value="{{ old('municipio') }}" :server-error="'{{ $errors->first('municipio') }}'"
                                 wrapper-class="col-12 col-sm-8 col-md-9"></form-input>
 
-                            <form-input label="Estado" name="estado" id="estado" type="text" placeholder="UF"
-                                required maxlength="2" value="{{ old('estado') }}"
-                                :server-error="'{{ $errors->first('estado') }}'"
+                            <form-input label="Estado" name="estado" id="estado" placeholder="Estado" required
+                                value="{{ old('estado') }}" :server-error="'{{ $errors->first('estado') }}'"
                                 wrapper-class="col-12 col-sm-4 col-md-3"></form-input>
                         </div>
                     </div>
