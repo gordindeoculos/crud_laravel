@@ -19,6 +19,7 @@
       :min="min"
       :max="max"
       :step="step"
+      :maxlength="maxlength"
     />
 
     <div v-if="serverError" class="invalid-feedback">{{ serverError }}</div>
@@ -31,7 +32,7 @@ export default {
   name: 'FormInput',
   props: {
     label: { type: String, default: '' },
-    type: { type: String, default: 'text' }, // "text", "email", "tel", "number"
+    type: { type: String, default: 'text' }, // text, email, tel, number, etc.
     name: { type: String, required: true },
     id: { type: String, required: true },
     placeholder: { type: String, default: '' },
@@ -41,7 +42,10 @@ export default {
     serverError: { type: String, default: '' },
     min: { type: [String, Number], default: null },
     max: { type: [String, Number], default: null },
-    step: { type: [String, Number], default: null }
+    step: { type: [String, Number], default: null },
+    maxlength: { type: [String, Number], default: null },
+    pattern: { type: String, default: null },
+    title: { type: String, default: null }
   },
   data() {
     return {
@@ -52,12 +56,15 @@ export default {
   computed: {
     inputPattern() {
       if (this.type === 'tel') return '\\(\\d{2}\\) \\d{4,5}-\\d{4}'
-      return null
+      if (this.maxlength === 2) return '.{2}' // ex: UF
+      return this.pattern
     },
     inputTitle() {
       if (this.type === 'tel')
         return 'Digite um telefone no formato (99) 9999-9999 ou (99) 99999-9999'
-      return null
+      if (this.maxlength === 2)
+        return 'O campo deve conter exatamente 2 caracteres'
+      return this.title
     }
   },
   methods: {
@@ -70,21 +77,27 @@ export default {
         return
       }
 
-      // Validação e-mail
+      // Email
       if (this.type === 'email' && val && !this.isValidEmail(val)) {
         this.errorMessage = 'Por favor, insira um e-mail válido.'
         return
       }
 
-      // Validação telefone
+      // Telefone
       if (this.type === 'tel' && val && !this.isValidPhone(val)) {
-        this.errorMessage = 'Digite um telefone no formato correto.'
+        this.errorMessage = 'Digite um telefone no formato correto: (99) 9999-9999 ou (99) 99999-9999.'
         return
       }
 
-      // Validação número
+      // Número
       if (this.type === 'number' && val && isNaN(val)) {
         this.errorMessage = 'Por favor, insira um número válido.'
+        return
+      }
+
+      // UF (2 caracteres)
+      if (this.maxlength === 2 && val && val.length !== 2) {
+        this.errorMessage = 'O campo deve conter exatamente 2 caracteres.'
         return
       }
 

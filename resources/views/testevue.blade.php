@@ -51,8 +51,9 @@
                                 value="{{ old('municipio') }}" :server-error="'{{ $errors->first('municipio') }}'"
                                 wrapper-class="col-12 col-sm-8 col-md-9"></form-input>
 
-                            <form-input label="Estado" name="estado" id="estado" placeholder="Estado" required
-                                value="{{ old('estado') }}" :server-error="'{{ $errors->first('estado') }}'"
+                            <form-input label="Estado" name="estado" id="estado" type="text" placeholder="UF"
+                                required maxlength="2" value="{{ old('estado') }}"
+                                :server-error="'{{ $errors->first('estado') }}'"
                                 wrapper-class="col-12 col-sm-4 col-md-3"></form-input>
                         </div>
                     </div>
