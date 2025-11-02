@@ -23,14 +23,15 @@
                         </div>
 
                         <div class="row g-3 mb-3">
-                            <form-input label="Telefone" name="telefone" id="telefone" placeholder="Telefone" required
-                                value="{{ old('telefone') }}" :server-error="'{{ $errors->first('telefone') }}'"
-                                wrapper-class="col-12 col-sm-6 col-md-4"></form-input>
+                            <form-input label="Telefone" name="telefone" id="telefone" type="tel"
+                                placeholder="(99) 99999-9999" required value="{{ old('telefone') }}"
+                                :server-error="'{{ $errors->first('telefone') }}'"
+                                wrapper-class="col-12 col-sm-6 col-md-6"></form-input>
 
                             <form-input label="E-mail" name="email" id="email" type="email"
                                 placeholder="Digite seu e-mail" required value="{{ old('email') }}"
                                 :server-error="'{{ $errors->first('email') }}'"
-                                wrapper-class="col-12 col-sm-6 col-md-8"></form-input>
+                                wrapper-class="col-12 col-sm-6 col-md-6"></form-input>
 
                         </div>
 
