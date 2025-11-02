@@ -27,9 +27,11 @@
                                 value="{{ old('telefone') }}" :server-error="'{{ $errors->first('telefone') }}'"
                                 wrapper-class="col-12 col-sm-6 col-md-4"></form-input>
 
-                            <form-input label="E-mail" name="email" id="email" type="email" placeholder="E-mail"
-                                required value="{{ old('email') }}" :server-error="'{{ $errors->first('email') }}'"
+                            <form-input label="E-mail" name="email" id="email" type="email"
+                                placeholder="Digite seu e-mail" required value="{{ old('email') }}"
+                                :server-error="'{{ $errors->first('email') }}'"
                                 wrapper-class="col-12 col-sm-6 col-md-8"></form-input>
+
                         </div>
 
                         <div class="row g-3 mb-3">

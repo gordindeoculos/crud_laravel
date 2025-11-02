@@ -11,14 +11,12 @@
       class="form-control"
       :class="{ 'is-invalid': serverError || errorMessage }"
       :placeholder="placeholder"
-      :value="value"
+      v-model="inputValue"
       :required="required"
-      @blur="checkRequired"
+      @blur="checkInput"
     />
 
-    <!-- mensagem do Laravel -->
     <div v-if="serverError" class="invalid-feedback">{{ serverError }}</div>
-    <!-- mensagem de validação do Vue -->
     <div v-else-if="errorMessage" class="invalid-feedback">{{ errorMessage }}</div>
   </div>
 </template>
@@ -35,20 +33,35 @@ export default {
     required: { type: Boolean, default: false },
     value: { type: String, default: '' },
     wrapperClass: { type: String, default: 'col-12 col-sm-6 col-md-8' },
-    serverError: { type: String, default: '' } // para receber erro do Laravel
+    serverError: { type: String, default: '' }
   },
   data() {
     return {
+      inputValue: this.value,
       errorMessage: ''
     }
   },
   methods: {
-    checkRequired(event) {
-      if (this.required && !event.target.value.trim()) {
-        this.errorMessage = 'Este campo é de preenchimento obrigatório.'
-      } else {
-        this.errorMessage = ''
+    checkInput() {
+      const val = this.inputValue.trim();
+
+      // Required
+      if (this.required && !val) {
+        this.errorMessage = 'Este campo é de preenchimento obrigatório.';
+        return;
       }
+
+      // Validação de e-mail
+      if (this.type === 'email' && val && !this.isValidEmail(val)) {
+        this.errorMessage = 'Por favor, insira um e-mail válido.';
+        return;
+      }
+
+      this.errorMessage = '';
+    },
+    isValidEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
     }
   }
 }
