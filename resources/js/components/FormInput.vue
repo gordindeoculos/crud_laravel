@@ -1,7 +1,8 @@
 <template>
   <div :class="wrapperClass">
     <label :for="id" class="form-label">
-      {{ label }} <span v-if="required">*</span>
+      {{ label }}
+      <span v-if="required">*</span>
     </label>
 
     <input
@@ -9,17 +10,17 @@
       :name="name"
       :id="id"
       class="form-control"
-      :class="{ 'is-invalid': serverError || errorMessage }"
+      :class="{ 'is-invalid': errorMessage }"
       :placeholder="placeholder"
-      v-model="internalValue"
+      v-model="inputValue"
+      :pattern="inputPattern"
+      :title="inputTitle"
+      :maxlength="maxlength"
       :required="required"
-      @blur="checkRequired"
+      @blur="checkInput"
     />
 
-    <!-- mensagem do Laravel -->
-    <div v-if="serverError" class="invalid-feedback">{{ serverError }}</div>
-    <!-- mensagem de validação do Vue -->
-    <div v-else-if="errorMessage" class="invalid-feedback">{{ errorMessage }}</div>
+    <div v-if="errorMessage" class="invalid-feedback">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -33,34 +34,86 @@ export default {
     id: { type: String, required: true },
     placeholder: { type: String, default: '' },
     required: { type: Boolean, default: false },
-    value: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
     wrapperClass: { type: String, default: 'col-12 col-sm-6 col-md-8' },
-    serverError: { type: String, default: '' }
+    pattern: { type: String, default: null },
+    title: { type: String, default: null },
+    maxlength: { type: [String, Number], default: null },
   },
   data() {
     return {
-      internalValue: this.value,
-      errorMessage: ''
+      inputValue: this.value,
+      errorMessage: '',
     }
+  },
+  computed: {
+    inputPattern() {
+      if (this.type === 'tel') return '\\(\\d{2}\\) \\d{4,5}-\\d{4}'
+      const max = Number(this.maxlength)
+      if (!Number.isNaN(max) && max > 0) return `.{${max}}`
+      return this.pattern || null
+    },
+    inputTitle() {
+      if (this.type === 'tel')
+        return 'Digite um telefone no formato (99) 9999-9999 ou (99) 99999-9999'
+      const max = Number(this.maxlength)
+      if (!Number.isNaN(max) && max > 0)
+        return `O campo deve conter exatamente ${max} caracteres`
+      return this.title || null
+    },
   },
   watch: {
-    // Mantém o internalValue sincronizado com a prop
     value(newVal) {
-      this.internalValue = newVal
+      this.inputValue = newVal
     },
-    internalValue(newVal) {
-      // Emite atualização para o pai
-      this.$emit('update:value', newVal)
-    }
   },
   methods: {
-    checkRequired() {
-      if (this.required && !this.internalValue.trim()) {
+    checkInput() {
+      const val = String(this.inputValue || '').trim()
+
+      // Requerido
+      if (this.required && !val) {
         this.errorMessage = 'Este campo é de preenchimento obrigatório.'
-      } else {
-        this.errorMessage = ''
+        return
       }
-    }
-  }
+
+      // E-mail
+      if (this.type === 'email' && val && !this.isValidEmail(val)) {
+        this.errorMessage = 'Por favor, insira um e-mail válido.'
+        return
+      }
+
+      // Telefone
+      if (this.type === 'tel' && val && !this.isValidPhone(val)) {
+        this.errorMessage = 'Digite um telefone no formato (99) 9999-9999 ou (99) 99999-9999.'
+        return
+      }
+
+      // Número
+      if (this.type === 'number' && val && isNaN(val)) {
+        this.errorMessage = 'Por favor, insira um número válido.'
+        return
+      }
+
+      // Verificação de tamanho exato (ex.: Estado com 2 caracteres)
+      const max = Number(this.maxlength)
+      if (!Number.isNaN(max) && max > 0 && val && val.length !== max) {
+        this.errorMessage = `O campo deve conter exatamente ${max} caracteres.`
+        return
+      }
+
+      this.errorMessage = ''
+    },
+
+    isValidEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      return regex.test(email)
+    },
+
+    isValidPhone(phone) {
+      const regex = /^\(\d{2}\) \d{4,5}-\d{4}$/
+      return regex.test(phone)
+    },
+  },
 }
 </script>
