@@ -60,7 +60,7 @@ app.mount('#app');
 
 Crie um arquivo em `resources/js/components/OlaMundo.vue` com este conteúdo:
 
-```vue
+```html
 <template>
   <div class="container">
     <h1>Olá, {{ nome }}!</h1>
@@ -121,7 +121,7 @@ app.mount('#app');
 
 No seu `testevue.blade.php` ou qualquer view Blade:
 
-```blade
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -191,7 +191,7 @@ Agora vamos analisar cada um deles:
 
 ## 🔷 `<template>`
 
-```vue
+```html
 <template>
   <div class="container">
     <h1>Olá, {{ nome }}!</h1>
@@ -318,7 +318,7 @@ input {
 
 Crie um arquivo em `resources/js/components/InputField.vue` com este conteúdo:
 
-```vue
+```html
 <template>
   <div class="mb-3">
     <label :for="id" class="form-label">
@@ -409,7 +409,7 @@ app.mount('#app');
 
 No seu `testevue.blade.php` ou qualquer view Blade:
 
-```blade
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -462,7 +462,7 @@ Esse componente é um **campo de formulário reutilizável**, com:
 
 ## 🔹 `<template>`
 
-```vue
+```html
 <template>
   <div class="mb-3">
 ```
@@ -474,7 +474,7 @@ Esse componente é um **campo de formulário reutilizável**, com:
 
 ### 🔸 Label
 
-```vue
+```html
 <label :for="id" class="form-label">
   {{ label }} <span v-if="requerido" class="text-danger">*</span>
 </label>
@@ -489,7 +489,7 @@ Esse componente é um **campo de formulário reutilizável**, com:
 
 ### 🔸 Campo de input
 
-```vue
+```html
 <input
   :type="tipo"
   :id="id"
@@ -518,7 +518,7 @@ Cada parte faz o seguinte:
 
 ### 🔸 Exibição do erro
 
-```vue
+```html
 <div v-if="erro" class="form-text text-danger">
   {{ erro }}
 </div>
@@ -566,7 +566,7 @@ props: {
 
 As **props** são parâmetros que o componente recebe de fora. Por exemplo:
 
-```vue
+```html
 <CampoTexto id="email" label="Email" placeholder="Digite seu email" requerido />
 ```
 
@@ -618,7 +618,7 @@ methods: {
 
 Aqui está como você pode usar esse componente em outro arquivo:
 
-```vue
+```html
 <CampoTexto
   id="nome"
   label="Nome completo"
