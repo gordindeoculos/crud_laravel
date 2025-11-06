@@ -39,7 +39,7 @@ resources/js/components/FormInput.vue
 
 E adicione o seguinte conteúdo:
 
-```vue
+```html
 <template>
   <div class="mb-3">
     <label :for="id" class="form-label">{{ label }}</label>
@@ -93,6 +93,173 @@ export default {
 
 ---
 
+## Explicação detalhada
+
+Vamos detalhar o código **trecho por trecho** — ele define um **componente Vue.js** chamado `FormInput`, que é um campo de formulário reutilizável.
+
+---
+
+### 🧱 Estrutura geral
+
+O arquivo segue o formato padrão de um **Single File Component (SFC)** do Vue:
+
+```html
+<template> ... </template>
+<script> ... </script>
+<style scoped> ... </style>
+```
+
+Cada parte tem uma função específica:
+
+* `<template>` → define a **estrutura HTML** exibida.
+* `<script>` → contém a **lógica** (dados, propriedades, comportamento).
+* `<style scoped>` → define os **estilos locais** do componente (aplicados apenas a ele).
+
+---
+
+### 🧩 Template
+
+```html
+<template>
+  <div class="mb-3">
+    <label :for="id" class="form-label">{{ label }}</label>
+    <input
+      :type="type"
+      class="form-control"
+      :name="name"
+      :id="id"
+      :placeholder="placeholder"
+      :required="required"
+      v-model="inputValue"
+    />
+    <p class="mt-1 text-muted">Valor atual: {{ inputValue }}</p>
+  </div>
+</template>
+```
+
+### 🔹 Estrutura HTML
+
+* O componente é envolvido por uma `<div>` com a classe Bootstrap `mb-3` (margem inferior).
+* Um `<label>` é vinculado ao campo de entrada (`<input>`) via `:for="id"`.
+* O `<input>` é do tipo definido em `props.type` (por padrão, `"text"`).
+* Abaixo, um parágrafo (`<p>`) mostra em tempo real o valor atual do campo.
+
+### 🔹 Uso das diretivas Vue
+
+* `:` (bind) → vincula atributos HTML a **propriedades dinâmicas**.
+
+  * Exemplo: `:type="type"` faz o `type` do input depender da prop `type`.
+* `v-model="inputValue"` → cria **ligação bidirecional** (two-way binding) entre o campo e a variável `inputValue`.
+  Isso significa que:
+
+  * Quando o usuário digita, `inputValue` é atualizado.
+  * Se `inputValue` mudar no script, o campo também é atualizado.
+
+---
+
+## 🧠 Script
+
+```js
+export default {
+  name: 'FormInput',
+  props: {
+    label: { type: String, default: '' },
+    type: { type: String, default: 'text' },
+    name: { type: String, required: true },
+    id: { type: String, required: true },
+    placeholder: { type: String, default: '' },
+    required: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      inputValue: '' // valor interno do input
+    }
+  },
+  mounted() {
+    console.log(`Componente ${this.id} montado.`)
+  }
+}
+```
+
+### 🔹 `name`
+
+Define o nome do componente como `'FormInput'`.
+
+### 🔹 `props`
+
+Essas são as **propriedades recebidas de um componente pai**:
+
+| Prop          | Tipo      | Obrigatório | Padrão   | Descrição                                             |
+| ------------- | --------- | ----------- | -------- | ----------------------------------------------------- |
+| `label`       | `String`  | ❌           | `''`     | Texto exibido acima do campo                          |
+| `type`        | `String`  | ❌           | `'text'` | Tipo do input (ex: `"text"`, `"email"`, `"password"`) |
+| `name`        | `String`  | ✅           | —        | Nome do campo (usado em formulários)                  |
+| `id`          | `String`  | ✅           | —        | ID do campo (associado ao label)                      |
+| `placeholder` | `String`  | ❌           | `''`     | Texto de exemplo dentro do input                      |
+| `required`    | `Boolean` | ❌           | `false`  | Indica se o campo é obrigatório                       |
+
+### 🔹 `data()`
+
+Retorna um **objeto reativo**, ou seja, qualquer mudança em `inputValue` reflete automaticamente no template.
+
+```js
+data() {
+  return { inputValue: '' }
+}
+```
+
+Esse valor é o estado interno do input.
+
+### 🔹 `mounted()`
+
+O **hook de ciclo de vida** `mounted()` é executado quando o componente é inserido no DOM.
+Aqui ele apenas faz um `console.log()` para indicar que o componente foi montado.
+
+---
+
+## 🎨 Estilo
+
+```css
+<style scoped>
+.text-muted {
+  font-size: 0.9rem;
+}
+</style>
+```
+
+* `scoped` → garante que os estilos sejam **aplicados apenas a este componente** (evita conflitos globais).
+* `.text-muted` → reduz o tamanho da fonte da linha que mostra o valor atual.
+
+---
+
+## ⚙️ Exemplo de uso
+
+```html
+<form-input label="Nome" name="nome" id="nome" placeholder="Digite seu nome" required></form-input>
+```
+
+Isso renderizaria um campo de texto com:
+
+* Label “Nome completo”
+* Placeholder “Digite seu nome”
+* Exigência de preenchimento (`required`)
+* Exibição dinâmica: `Valor atual: ...`
+
+---
+
+## 📦 Em resumo
+
+| Parte            | Função                                     |
+| ---------------- | ------------------------------------------ |
+| `<template>`     | Define o HTML e as ligações reativas       |
+| `props`          | Permitem customizar o componente ao usá-lo |
+| `data()`         | Guarda o valor digitado                    |
+| `v-model`        | Mantém o valor do input sincronizado       |
+| `mounted()`      | Executa ação ao montar (aqui apenas log)   |
+| `<style scoped>` | Garante estilo local e isolado             |
+
+---
+
 ## 3. Registrando o Componente
 
 No arquivo `resources/js/app.js`, importe e registre o componente:
@@ -119,7 +286,7 @@ app.mount('#app');
 
 No seu arquivo Blade (por exemplo, `resources\views\testevue.blade.php`), adicione:
 
-```blade
+```html
 @extends('layouts.app')
 
 @section('content')
@@ -259,7 +426,7 @@ Veja como fazer isso **de forma simples e totalmente dentro do componente**:
 
 ### `FormInput.vue` com validação de `required`
 
-```vue
+```html
 <template>
   <div class="mb-3">
     <label :for="id" class="form-label">{{ label }}</label>
@@ -352,7 +519,7 @@ resources/js/components/FormInput.vue
 
 Com o seguinte conteúdo:
 
-```vue
+```html
 <template>
   <div :class="wrapperClass">
     <label :for="id" class="form-label">
@@ -427,7 +594,7 @@ export default {
 
 Em `resources\views\testevue.blade.php` atualize com o código abaixo:
 
-```blade
+```html
 @extends('layouts.app')
 
 @section('content')
@@ -527,7 +694,7 @@ Vamos aprimorar o componente para suportar **validação de e-mail**, mantendo a
 
 ### Componente atualizado: `FormInput.vue`
 
-```vue
+```html
 <template>
   <div :class="wrapperClass">
     <label :for="id" class="form-label">
@@ -602,7 +769,7 @@ export default {
 
 ### Atualize o componente para o e-mail no arquivo `resources\views\testevue.blade.php` conforme abaixo:
 
-```blade
+```html
 <form-input
     label="E-mail"
     name="email"
@@ -645,7 +812,7 @@ Podemos adicionar ao componente a validação de **telefone** de forma semelhant
 
 ### Componente atualizado `FormInput.vue` com validação de telefone
 
-```vue
+```html
 <template>
   <div :class="wrapperClass">
     <label :for="id" class="form-label">
@@ -747,7 +914,7 @@ export default {
 
 ### Como usar no Blade
 
-```blade
+```html
 <form-input
     label="Telefone"
     name="telefone"
@@ -795,7 +962,7 @@ Fazer uma verificação simples de número válido
 
 ### Versão atualizada do `FormInput.vue` com suporte a `type="number"`
 
-```vue
+```html
 <template>
   <div :class="wrapperClass">
     <label :for="id" class="form-label">
@@ -907,7 +1074,7 @@ export default {
 
 ### Exemplo de uso no Blade
 
-```blade
+```html
 <form-input
     label="Número"
     name="numero"
@@ -958,7 +1125,7 @@ Assim mantemos o componente **genérico**, mas flexível o bastante para lidar c
 
 ### Versão atualizada do `FormInput.vue` com validação de 2 caracteres (UF)
 
-```vue
+```html
 <template>
   <div :class="wrapperClass">
     <label :for="id" class="form-label">
@@ -1084,7 +1251,7 @@ export default {
 
 ### Exemplo de uso no Blade
 
-```blade
+```html
 <form-input
     label="Estado"
     name="estado"
@@ -1125,7 +1292,7 @@ Faça uma cópia do arquivo `resources\views\create-colaboradores.blade.php` e r
 
 Subistitua o formulário `<form></form>` pelo código com uso do componente `FormInput.vue`, o arquivo `resources\views\create-colaboradores.blade.php` deve ficar assim:
 
-```blade
+```html
 @extends('layouts.app')
 
 @section('styles')
@@ -1223,7 +1390,7 @@ Faça uma cópia do arquivo `resources\views\edit-colaboradores.blade.php` e ren
 
 Subistitua o formulário `<form></form>` pelo código com uso do componente `FormInput.vue`, o arquivo `resources\views\edit-colaboradores.blade.php` deve ficar assim:
 
-```blade
+```html
 @extends('layouts.app')
 
 @section('styles')
