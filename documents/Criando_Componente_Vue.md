@@ -1,6 +1,12 @@
-# Tutorial: Criando e Usando um Componente Vue.js Básico no Laravel 11
+# Criando e Usando um Componente Vue.js Básico no Laravel 11
 
 Este guia mostra como criar e registrar um **componente Vue.js simples** dentro de um projeto **Laravel 11** — seja ele baseado em **Breeze, Jetstream ou Inertia**.
+
+O objetivo deste tutorial é demonstrar como criar e utilizar um componente no Vue.js. Para isso, vamos desenvolver um componente que será utilizado nos formulários de cadastro e edição de colaboradores do nosso projeto CRUD com Laravel 11.
+
+Para facilitar o entendimento, começaremos com a criação de um componente básico e, aos poucos, adicionaremos novas funcionalidades até chegarmos à versão final — capaz de realizar toda a validação dos campos do formulário.
+
+Vale ressaltar que o foco deste tutorial não é o estudo aprofundado do Vue.js, mas sim a compreensão prática de como esse recurso pode ser aplicado em nosso projeto.
 
 O componente será um campo de formulário reutilizável (`FormInput.vue`) com `label`, `placeholder`, `v-model` interno e exibição do valor atual.
 
