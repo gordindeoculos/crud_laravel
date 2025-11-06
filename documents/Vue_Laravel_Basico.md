@@ -132,10 +132,8 @@ No seu `testevue.blade.php` ou qualquer view Blade:
 <body>
     <div id="app" class="container mt-5">
         <h1>Testando o Vue</h1>
-
-        <div id="app">
-            <hello-world></hello-world>
-        </div>
+        <hr>
+        <ola-mundo></ola-mundo>        
     </div>
 </body>
 </html>
@@ -146,7 +144,7 @@ No seu `testevue.blade.php` ou qualquer view Blade:
 ```php
 Route::get('/testevue', function () {
     return view('testevue');
-});
+})->name('testevue');
 ```
 
 ### 🔹 **Rodar o Vite**
@@ -322,7 +320,7 @@ Crie um arquivo em `resources/js/components/InputField.vue` com este conteúdo:
 <template>
   <div class="mb-3">
     <label :for="id" class="form-label">
-      {{ label }} <span v-if="requerido" class="text-danger">*</span>
+      {{ label }} <span v-if="required" class="text-danger">*</span>
     </label>
     
     <input
@@ -331,7 +329,7 @@ Crie um arquivo em `resources/js/components/InputField.vue` com este conteúdo:
       :name="id"
       :placeholder="placeholder"
       v-model="valor"
-      :required="requerido"
+      :required="required"
       @blur="validar"
       class="form-control"
     >
@@ -357,7 +355,7 @@ export default {
       type: String,
       default: 'text'
     },
-    requerido: {
+    required: {
       type: Boolean,
       default: false
     }
@@ -370,7 +368,7 @@ export default {
   },
   methods: {
     validar() {
-      if (this.requerido && !this.valor.trim()) {
+      if (this.required && !this.valor.trim()) {
         this.erro = 'Preenchimento obrigatório.';
       } else {
         this.erro = '';
@@ -422,7 +420,7 @@ No seu `testevue.blade.php` ou qualquer view Blade:
         <h1>Testando o Vue</h1>
 
         <div id="app">
-            <input-field id="nome" label="Nome" placeholder="Digite seu nome" :requerido="true"><input-field>
+            <input-field id="nome" label="Nome" placeholder="Digite seu nome" required><input-field>
         </div>
     </div>
 </body>
@@ -482,7 +480,7 @@ Cada parte tem uma função específica:
 ```html
 <div class="mb-3">
   <label :for="id" class="form-label">
-    {{ label }} <span v-if="requerido" class="text-danger">*</span>
+    {{ label }} <span v-if="required" class="text-danger">*</span>
   </label>
   
   <input
@@ -491,7 +489,7 @@ Cada parte tem uma função específica:
     :name="id"
     :placeholder="placeholder"
     v-model="valor"
-    :required="requerido"
+    :required="required"
     @blur="validar"
     class="form-control"
   >
@@ -524,7 +522,7 @@ Cada parte tem uma função específica:
   * `:id` e `:name` → ambos com o mesmo valor, facilitando a identificação no formulário;
   * `:placeholder` → mostra o texto de dica no campo;
   * `v-model="valor"` → cria **ligação bidirecional (two-way binding)** entre o input e a variável `valor` no `data()`;
-  * `:required="requerido"` → marca o campo como obrigatório se `true`;
+  * `:required="required"` → marca o campo como obrigatório se `true`;
   * `@blur="validar"` → executa a validação quando o campo perde o foco.
 * A classe `form-control` aplica o estilo padrão do Bootstrap.
 
@@ -552,7 +550,7 @@ export default {
       type: String,
       default: 'text'
     },
-    requerido: {
+    required: {
       type: Boolean,
       default: false
     }
@@ -565,7 +563,7 @@ export default {
   },
   methods: {
     validar() {
-      if (this.requerido && !this.valor.trim()) {
+      if (this.required && !this.valor.trim()) {
         this.erro = 'Preenchimento obrigatório.';
       } else {
         this.erro = '';
@@ -589,7 +587,7 @@ São **propriedades recebidas de fora** (do componente pai).
 | `placeholder`  | `String`  | Texto de dica dentro do campo.                     |
 | `valorInicial` | `String`  | Valor padrão inicial do campo.                     |
 | `tipo`         | `String`  | Tipo do input (`text`, `email`, `password`, etc.). |
-| `requerido`    | `Boolean` | Define se o campo é obrigatório.                   |
+| `required`    | `Boolean` | Define se o campo é obrigatório.                   |
 
 ---
 
@@ -609,7 +607,7 @@ Define as funções do componente.
 * **`validar()`** → método que valida o campo quando ele perde o foco (`blur`):
 
   ```js
-  if (this.requerido && !this.valor.trim()) {
+  if (this.required && !this.valor.trim()) {
       this.erro = 'Preenchimento obrigatório.';
   } else {
       this.erro = '';
@@ -643,7 +641,7 @@ Isso **registra o componente globalmente**, permitindo usá-lo em qualquer parte
     id="nome"
     label="Nome"
     placeholder="Digite seu nome"
-    :requerido="true">
+    required>
   </input-field>
 </div>
 ```
