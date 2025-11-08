@@ -653,7 +653,7 @@ Em `resources\views\testevue.blade.php` atualize com o código abaixo:
 
                     <div class="card-footer">
                         <div class="col-auto">
-                            <a href="{{ route('coloborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
+                            <a href="{{ route('colaborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
                             <button type="submit" class="btn btn-primary">Enviar</button>
                         </div>
                     </div>
@@ -1364,7 +1364,7 @@ Subistitua o formulário `<form></form>` pelo código com uso do componente `For
 
                             <div class="card-footer">
                                 <div class="col-auto">
-                                    <a href="{{ route('coloborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
+                                    <a href="{{ route('colaborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </div>
                             </div>
@@ -1468,7 +1468,7 @@ Subistitua o formulário `<form></form>` pelo código com uso do componente `For
 
                             <div class="card-footer">
                                 <div class="col-auto">
-                                    <a href="{{ route('coloborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
+                                    <a href="{{ route('colaborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
                                     <button type="submit" class="btn btn-primary">Salvar</button>
                                 </div>
                             </div>

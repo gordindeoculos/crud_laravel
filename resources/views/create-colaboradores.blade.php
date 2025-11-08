@@ -122,7 +122,7 @@
 
                             <div class="card-footer">
                                 <div class="col-auto">
-                                    <a href="{{ route('coloborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
+                                    <a href="{{ route('colaborador.list') }}" class="btn btn-secondary me-2">Voltar</a>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </div>
                             </div>

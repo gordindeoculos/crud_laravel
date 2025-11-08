@@ -16,5 +16,5 @@ Route::get('/edit-colaborador/{id}', [ColaboradorController::class, 'edit'])->na
 Route::put('/update-colaborador/{id}', [ColaboradorController::class, 'update'])->name('colaborador.update');
 Route::get('/detalhes-colaborador/{id}', [ColaboradorController::class, 'show'])->name('colaborador.detalhes');
 Route::delete('/excluir-colaborador/{id}', [ColaboradorController::class, 'destroy'])->name('colaborador.excluir');
-Route::get('/list-colaboradores', [ColaboradorController::class, 'index'])->name('coloborador.list');
+Route::get('/list-colaboradores', [ColaboradorController::class, 'index'])->name('colaborador.list');
 Route::post('/colaboradores-store', [ColaboradorController::class, 'store'])->name('colaborador.store');

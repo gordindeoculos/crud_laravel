@@ -72,7 +72,7 @@ class ColaboradorController extends Controller
 
         try {
             $colaborador = Colaborador::create($data);
-            return redirect()->route('coloborador.list')->with('msg', "Colaborador $colaborador->nome foi incluído com sucesso!");
+            return redirect()->route('colaborador.list')->with('msg', "Colaborador $colaborador->nome foi incluído com sucesso!");
         } catch (QueryException $e) {
             // Verifique se o erro é de chave única
             if ($e->errorInfo[1] == 1062) {
@@ -168,7 +168,7 @@ class ColaboradorController extends Controller
         try {
             $colaborador = Colaborador::findOrFail($id);
             $colaborador->update($data);
-            return redirect()->route('coloborador.list')->with('msg', "Colaborador $colaborador->nome foi atualizado com sucesso!");
+            return redirect()->route('colaborador.list')->with('msg', "Colaborador $colaborador->nome foi atualizado com sucesso!");
         } catch (QueryException $e) {
             // Verifique se o erro é de chave única
             if ($e->errorInfo[1] == 1062) {

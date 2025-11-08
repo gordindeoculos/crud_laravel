@@ -21,7 +21,7 @@
                     <p class="card-text"><b>Endereço:</b> {{ $colaborador->logradouro }}, nº {{ $colaborador->numero }}</p>
                     <p class="card-text"><b>Município:</b> {{ $colaborador->municipio }}/{{ $colaborador->estado }}</p>
                     <hr>
-                    <a href="{{ route('coloborador.list') }}" class="btn btn-primary">Voltar</a>
+                    <a href="{{ route('colaborador.list') }}" class="btn btn-primary">Voltar</a>
                 </div>
             </div>
         </div>
