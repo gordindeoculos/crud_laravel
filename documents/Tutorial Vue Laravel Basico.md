@@ -27,29 +27,103 @@ No dia a dia com Laravel, muitas vezes escrevemos o mesmo código várias vezes,
 
 ## 🔹 **Instalação no Laravel (Laravel 11)**
 
-### 📦 Instalar as dependências
+### 🧠 Instalar o Vue 3 + plugin do Vite
 
-Se estiver usando Vite (Laravel 11 usa por padrão):
+Execute o comando:
 
 ```bash
-npm install vue
+npm install vue @vitejs/plugin-vue
 ```
 
-### 📂 Habilitar Vue no Laravel (criado automaticamente no Laravel)
+Isso instala:
 
-No `resources/js/app.js`:
+* `vue`: o framework Vue 3
+* `@vitejs/plugin-vue`: plugin para o Vite processar arquivos `.vue`
+
+---
+
+### ⚙️ Configurar o Vite para usar o Vue
+
+Abra o arquivo `vite.config.js` e substitua seu conteúdo por este:
 
 ```js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+        vue(),
+    ],
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
+});
+```
+
+> 🔍 O `alias` é fundamental — ele garante que o Vite use a **versão completa do Vue**, que consegue compilar templates (`.vue`).
+
+---
+
+### 🧰 Criar a estrutura do Vue
+
+Crie o diretório e o componente inicial:
+
+```bash
+mkdir -p resources/js/components
+```
+
+E dentro dele, crie o arquivo `ExampleComponent.vue` com este conteúdo:
+
+```vue
+<template>
+  <div class="example-component">
+    <h1>Componente Vue funcionando!</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ExampleComponent',
+};
+</script>
+
+<style scoped>
+.example-component {
+  color: #2d3748;
+  font-weight: bold;
+}
+</style>
+```
+
+---
+
+### 🧩 Configurar o arquivo `resources/js/app.js`
+
+Substitua ou adicione o seguinte código:
+
+```js
+import './bootstrap';
 import { createApp } from 'vue';
 
+// Cria a instância da aplicação Vue
 const app = createApp({});
 
-// Exemplo de componente
+// Importa e registra o componente global
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
-// Monta a aplicação no HTML
+// Monta o Vue na div #app
 app.mount('#app');
+
+// Verificação no console
+console.log('Vue foi carregado!');
 ```
 
 ---
