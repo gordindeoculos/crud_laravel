@@ -4,7 +4,6 @@
 @endsection
 
 @section('scripts')
-    
 @endsection
 
 @section('content')
@@ -26,8 +25,8 @@
                                     <div class="col-12 col-sm-6 col-md-8">
                                         <label for="nome" class="form-label">Nome*</label>
                                         <input type="text" class="form-control @error('nome') is-invalid @enderror"
-                                            name="nome" id="nome" placeholder="Nome" value="{{ old('nome', $colaborador->nome) }}"
-                                            required>
+                                            name="nome" id="nome" placeholder="Nome"
+                                            value="{{ old('nome', $colaborador->nome) }}" required>
                                         @error('nome')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -37,8 +36,8 @@
                                     <div class="col-12 col-sm-6 col-md-4">
                                         <label for="cargo" class="form-label">Cargo*</label>
                                         <input type="text" class="form-control @error('cargo') is-invalid @enderror"
-                                            name="cargo" id="cargo" placeholder="Cargo" value="{{ old('cargo', $colaborador->cargo) }}"
-                                            required>
+                                            name="cargo" id="cargo" placeholder="Cargo"
+                                            value="{{ old('cargo', $colaborador->cargo) }}" required>
                                         @error('cargo')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -51,7 +50,8 @@
                                         <label for="telefone" class="form-label">Telefone*</label>
                                         <input type="text" class="form-control @error('telefone') is-invalid @enderror"
                                             name="telefone" id="telefone" placeholder="Telefone"
-                                            value="{{ old('telefone', $colaborador->telefone) }}" pattern="\(\d{2}\) \d{4,5}-\d{4}"
+                                            value="{{ old('telefone', $colaborador->telefone) }}"
+                                            pattern="\(\d{2}\) \d{4,5}-\d{4}"
                                             title="Digite um telefone no formato (99) 9999-9999 ou (99) 99999-9999"
                                             required>
                                         @error('telefone')
@@ -63,8 +63,8 @@
                                     <div class="col-12 col-sm-6 col-md-8">
                                         <label for="email" class="form-label">E-mail*</label>
                                         <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                            name="email" id="email" placeholder="E-mail" value="{{ old('email', $colaborador->email) }}"
-                                            required>
+                                            name="email" id="email" placeholder="E-mail"
+                                            value="{{ old('email', $colaborador->email) }}" required>
                                         @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -87,8 +87,8 @@
                                     <div class="col-12 col-sm-4 col-md-3">
                                         <label for="numero" class="form-label">Número*</label>
                                         <input type="number" class="form-control @error('numero') is-invalid @enderror"
-                                            name="numero" id="numero" placeholder="Número" value="{{ old('numero', $colaborador->numero) }}"
-                                            required>
+                                            name="numero" id="numero" placeholder="Número"
+                                            value="{{ old('numero', $colaborador->numero) }}" required>
                                         @error('numero')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -111,9 +111,9 @@
                                     <div class="col-12 col-sm-4 col-md-3">
                                         <label for="estado" class="form-label">Estado*</label>
                                         <input type="text" class="form-control @error('estado') is-invalid @enderror"
-                                            name="estado" id="estado" placeholder="Estado" value="{{ old('estado', $colaborador->estado) }}"
-                                            pattern=".{2}" title="O campo deve conter exatamente 2 caracteres"
-                                            maxlength="2" required>
+                                            name="estado" id="estado" placeholder="Estado"
+                                            value="{{ old('estado', $colaborador->estado) }}" pattern=".{2}"
+                                            title="O campo deve conter exatamente 2 caracteres" maxlength="2" required>
                                         @error('estado')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
